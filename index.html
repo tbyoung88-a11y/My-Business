@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wavelength Home — Your side of the build.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #191919;
+    --paper: #FCFBF9;
+    --line: #E7E4DF;
+    --grey: #8C877F;
+    --body: #57534C;
+    --terra: #C4592F;
+    --terra-soft: #F6E8E0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: 'Jost', sans-serif; font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--terra); outline-offset: 3px; }
+
+  /* ===== Nav ===== */
+  nav { border-bottom: 1px solid var(--line); }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+  .logo { display: flex; align-items: center; gap: 14px; }
+  .logo svg { display: block; }
+  .logo-type { line-height: 1.1; }
+  .logo-type b { font-weight: 400; font-size: 14px; letter-spacing: 0.3em; display: block; }
+  .logo-type span { font-weight: 300; font-size: 10.5px; letter-spacing: 0.42em; color: var(--terra); }
+  .nav-links { display: flex; gap: 32px; font-size: 13px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; }
+  .nav-links a:hover { color: var(--terra); }
+  @media (max-width: 700px) { .nav-links { display: none; } }
+
+  /* ===== Hero ===== */
+  .hero { padding: 88px 0 0; }
+  .hero h1 {
+    font-weight: 300; font-size: clamp(38px, 6.4vw, 66px);
+    line-height: 1.12; letter-spacing: 0.01em; max-width: 17ch;
+  }
+  .hero h1 em { font-style: normal; color: var(--terra); }
+  .hero p.lede {
+    margin-top: 26px; font-size: 17px; font-weight: 300; line-height: 1.7;
+    color: var(--body); max-width: 54ch;
+  }
+  .hero-cta { margin-top: 36px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 14px 30px; font-size: 13px;
+    letter-spacing: 0.18em; text-transform: uppercase; font-weight: 400;
+    border: 1px solid var(--ink); transition: all 0.18s ease;
+  }
+  .btn.solid { background: var(--ink); color: var(--paper); }
+  .btn.solid:hover { background: var(--terra); border-color: var(--terra); }
+  .btn.ghost:hover { border-color: var(--terra); color: var(--terra); }
+
+  /* The signature: hero line rises into the house */
+  .hero-line { margin-top: 72px; overflow: hidden; }
+  .hero-line svg { display: block; width: 100%; height: auto; }
+  .hero-line path {
+    stroke-dasharray: 1600; stroke-dashoffset: 1600;
+    animation: draw 2.2s ease-out 0.3s forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* ===== Sections ===== */
+  section { padding: 80px 0; }
+  .sec-label {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--grey); margin-bottom: 18px;
+  }
+  h2 { font-weight: 300; font-size: clamp(26px, 3.6vw, 38px); line-height: 1.2; max-width: 24ch; }
+  .body-copy { margin-top: 20px; font-size: 15.5px; font-weight: 300; line-height: 1.75; color: var(--body); max-width: 58ch; }
+
+  /* Story section */
+  .story { border-top: 1px solid var(--line); }
+  .story .body-copy strong { font-weight: 400; color: var(--ink); }
+  .story-line { margin: 52px 0 10px; }
+  .story-line svg { display: block; width: 100%; height: auto; }
+  .story-caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 640px) { .story-caps { grid-template-columns: repeat(2, 1fr); row-gap: 18px; } }
+  .story-cap { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--grey); }
+  .story-cap:first-child { text-align: left; }
+  .story-cap:nth-child(2) { text-align: center; }
+  .story-cap:nth-child(3) { text-align: center; }
+  .story-cap:last-child { text-align: right; color: var(--terra); }
+  .story-kicker { margin-top: 34px; padding: 22px 26px; border-left: 3px solid var(--terra);
+    font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--body); max-width: 60ch; }
+
+  /* Stance section */
+  .stance { border-top: 1px solid var(--line); }
+  .stance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  @media (max-width: 780px) { .stance-grid { grid-template-columns: 1fr; } }
+  .stance-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
+  .stance-item { padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .stance-item h3 { font-weight: 400; font-size: 16px; letter-spacing: 0.04em; }
+  .stance-item p { margin-top: 6px; font-size: 14px; font-weight: 300; line-height: 1.65; color: var(--body); }
+
+  /* Services */
+  .services { border-top: 1px solid var(--line); }
+  .svc-grid { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (max-width: 860px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .svc-grid { grid-template-columns: 1fr; } }
+  .svc { background: var(--paper); padding: 32px 26px 30px; transition: background 0.18s ease; }
+  .svc:hover { background: var(--terra-soft); }
+  .svc svg { display: block; margin-bottom: 20px; }
+  .svc h3 { font-weight: 400; font-size: 16px; letter-spacing: 0.04em; }
+  .svc p { margin-top: 8px; font-size: 13.5px; font-weight: 300; line-height: 1.65; color: var(--body); }
+
+  /* Frequency divider */
+  .freq-divider { height: 28px; overflow: hidden; }
+  .freq-divider svg { display: block; width: 100%; height: 28px; }
+
+  /* Small stuff */
+  .small { border-top: 1px solid var(--line); }
+  .small-grid { margin-top: 44px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (max-width: 900px) { .small-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .small-grid { grid-template-columns: 1fr; } }
+  .small-col { background: var(--paper); padding: 28px 24px 26px; }
+  .small-col h3 { font-weight: 400; font-size: 14px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); margin-bottom: 16px; }
+  .small-col ul { list-style: none; }
+  .small-col li { font-size: 13.5px; font-weight: 300; line-height: 1.5; color: var(--body); padding: 7px 0 7px 20px; position: relative; border-bottom: 1px solid var(--line); }
+  .small-col li:last-child { border-bottom: none; }
+  .small-col li::before { content: ""; position: absolute; left: 0; top: 15px; width: 12px; height: 2px; background: var(--terra); }
+  .small-notes { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 24px; }
+  .small-note { flex: 1; min-width: 280px; font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--grey); padding-top: 14px; border-top: 1px solid var(--line); }
+  .small-note b { font-weight: 400; color: var(--body); }
+
+  /* Neighborhoods */
+  .hoods { border-top: 1px solid var(--line); }
+  .hood-row { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .hood {
+    padding: 12px 22px; border: 1px solid var(--ink);
+    font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 300;
+  }
+
+  /* CTA band */
+  .cta-band { background: var(--ink); color: var(--paper); padding: 72px 0; }
+  .cta-band h2 { color: var(--paper); }
+  .cta-band .body-copy { color: #B8B3AB; }
+  .cta-band .btn { border-color: var(--paper); color: var(--paper); margin-top: 32px; }
+  .cta-band .btn:hover { background: var(--terra); border-color: var(--terra); }
+
+  /* Footer */
+  footer { padding: 44px 0 56px; border-top: 1px solid var(--line); }
+  .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: center; }
+  .foot-in p { font-size: 12px; font-weight: 300; letter-spacing: 0.14em; text-transform: uppercase; color: var(--grey); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#" aria-label="Wavelength Home">
+      <svg width="72" height="26" viewBox="0 0 200 64">
+        <path d="M0 50 H62 V30 L86 10 L110 30 V50 H200"
+          fill="none" stroke="#191919" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="logo-type"><b>WAVELENGTH</b><span>HOME</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#story">The story</a>
+      <a href="#stance">Why us</a>
+      <a href="#services">Services</a>
+      <a href="#small">Small stuff</a>
+      <a href="#areas">Areas</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Your contractor has a team.<br>Now <em>you</em> do too.</h1>
+    <p class="lede">Wavelength Home is homeowner advocacy: expert oversight for people building, renovating, or repairing in Atlanta. We don't swing hammers and we don't take contractor referral fees. We work for one side of the table. Yours.</p>
+    <div class="hero-cta">
+      <a class="btn solid" href="#contact">Book a consultation</a>
+      <a class="btn ghost" href="#services">See what we do</a>
+    </div>
+  </div>
+  <div class="hero-line" aria-hidden="true">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0 96 H480 V52 L600 8 L720 52 V96 H1200"
+        fill="none" stroke="#C4592F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</header>
+
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="sec-label">The story</div>
+    <h2>I learned how houses should be built. Then I bought one.</h2>
+    <p class="body-copy">I grew up an independent home builder's kid. Job sites were the family business, and I learned early what right looks like: square corners, honest schedules, work you'd sign your name to. <strong>I know how things should be made.</strong></p>
+    <p class="body-copy">Then I bought my own home and spent ten agonizing years trying to get renovations completed. On budget. On time. Done right the first time. It didn't happen, for more reasons than I can count, and I had every advantage: I knew the trades, I knew the language, I knew what good work looked like. It still went sideways.</p>
+    <p class="body-copy">That's why Wavelength Home exists. Not because I read about the problem, but because I lived it, and nobody who's paying for a build should have to learn these lessons at that price.</p>
+
+    <div class="story-line" aria-hidden="true">
+      <svg viewBox="0 0 1200 110" preserveAspectRatio="none">
+        <path d="M0 78 H240
+                 L290 60 L340 78
+                 L380 40 L420 88 L455 52 L490 92 L525 46 L560 86 L595 55 L630 90 L665 48 L700 84 L735 58 L770 80
+                 H860 V52 L935 16 L1010 52 V78 H1200"
+          fill="none" stroke="#191919" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="story-caps">
+      <span class="story-cap">A builder's kid</span>
+      <span class="story-cap">Bought a home</span>
+      <span class="story-cap">Ten years of sideways</span>
+      <span class="story-cap">Wavelength Home</span>
+    </div>
+
+    <div class="story-kicker">DIY looks fun on TV. It plays out differently at the appraisal. The shows cut away before the resale, and we've seen what an inspector's report does to a weekend project. Good oversight isn't a cost. It's the part of the budget that protects the rest of it.</div>
+  </div>
+</section>
+
+<section class="stance" id="stance">
+  <div class="wrap stance-grid">
+    <div>
+      <div class="sec-label">The stance</div>
+      <h2>Oversight, not contracting.</h2>
+      <p class="body-copy">The construction industry works fine for everyone except the person paying for it. Contractors have estimators, project managers, and lawyers. Homeowners have a gut feeling and a Google search. We close that gap with someone who has read the contract, walked the site, and seen every trick before.</p>
+    </div>
+    <div class="stance-list">
+      <div class="stance-item">
+        <h3>Independent by design</h3>
+        <p>No kickbacks, no referral fees, no preferred-vendor lists. Our only revenue is your fee, so our only loyalty is your outcome.</p>
+      </div>
+      <div class="stance-item">
+        <h3>Fluent in both languages</h3>
+        <p>We translate builder-speak into decisions you can actually make, and homeowner priorities into terms crews respect.</p>
+      </div>
+      <div class="stance-item">
+        <h3>There before the problem</h3>
+        <p>Most construction disputes are lost at signing, not at framing. We get involved before the contract, not after the leak.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="freq-divider" aria-hidden="true">
+  <svg viewBox="0 0 1200 28" preserveAspectRatio="none">
+    <path d="M0 22 L30 6 L60 22 L90 6 L120 22 L150 6 L180 22 L210 6 L240 22 L270 6 L300 22 L330 6 L360 22 L390 6 L420 22 L450 6 L480 22 L510 6 L540 22 L570 6 L600 22 L630 6 L660 22 L690 6 L720 22 L750 6 L780 22 L810 6 L840 22 L870 6 L900 22 L930 6 L960 22 L990 6 L1020 22 L1050 6 L1080 22 L1110 6 L1140 22 L1170 6 L1200 22"
+      fill="none" stroke="#E7E4DF" stroke-width="2"/>
+  </svg>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-label">Six ways in</div>
+    <h2>Every phase of the build has a version of us.</h2>
+    <div class="svc-grid">
+      <div class="svc">
+        <svg width="48" height="24" viewBox="0 0 100 44"><path d="M0 36 H26 V20 L50 6 L74 20 V36 H100" fill="none" stroke="#C4592F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Pre-Build Planning</h3>
+        <p>Scope, budget reality-check, and sequencing before anyone bids. The cheapest change order is the one that never happens.</p>
+      </div>
+      <div class="svc">
+        <svg width="48" height="24" viewBox="0 0 100 44"><path d="M0 36 H22 V10 H78 V36 H100" fill="none" stroke="#C4592F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Bid &amp; Contract Review</h3>
+        <p>Line-by-line review of estimates and agreements. We flag the allowances, exclusions, and clauses that cost people houses.</p>
+      </div>
+      <div class="svc">
+        <svg width="48" height="24" viewBox="0 0 100 44"><path d="M0 36 H20 L36 12 L52 36 L68 12 L84 36 H100" fill="none" stroke="#C4592F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Construction Oversight</h3>
+        <p>Scheduled site walks at the milestones that matter, with photo documentation and plain-English progress reports.</p>
+      </div>
+      <div class="svc">
+        <svg width="48" height="24" viewBox="0 0 100 44"><path d="M0 36 H24 L38 20 L50 30 L62 14 L76 36 H100" fill="none" stroke="#C4592F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Punch List &amp; Closeout</h3>
+        <p>The final ten percent is where quality goes to die. We build the punch list, verify the fixes, and clear the final payment.</p>
+      </div>
+      <div class="svc">
+        <svg width="48" height="24" viewBox="0 0 100 44"><path d="M0 36 H30 C34 24 40 16 50 12 C60 16 66 24 70 36 H100" fill="none" stroke="#C4592F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Renovation Advisory</h3>
+        <p>Thinking about opening that wall? A one-time consult on feasibility, cost ranges, and what your house will actually allow.</p>
+      </div>
+      <div class="svc">
+        <svg width="48" height="24" viewBox="0 0 100 44"><path d="M0 36 H26 L40 22 H60 L74 36 H100" fill="none" stroke="#C4592F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Issue Resolution</h3>
+        <p>When a project has already gone sideways: independent assessment, documentation, and a path back to done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="small" id="small">
+  <div class="wrap">
+    <div class="sec-label">The small stuff</div>
+    <h2>Same standards. Smaller nails.</h2>
+    <p class="body-copy">Not everything needs a project plan. Some things just need someone who shows up with a level and does it right. Small tasks draw from the same bank of hours as the big work, so the hours you hold for oversight also get the gallery wall hung straight.</p>
+
+    <div class="small-grid">
+      <div class="small-col">
+        <h3>Hang &amp; Mount</h3>
+        <ul>
+          <li>Art and mirrors</li>
+          <li>Gallery walls</li>
+          <li>TVs, cords concealed</li>
+          <li>Curtains and blinds</li>
+          <li>Shelving and hooks</li>
+        </ul>
+      </div>
+      <div class="small-col">
+        <h3>Fix &amp; Adjust</h3>
+        <ul>
+          <li>Sticking doors and drawers</li>
+          <li>Drywall patch and touch-up</li>
+          <li>Caulk refresh, kitchen and bath</li>
+          <li>Knobs, pulls, and hinges</li>
+          <li>Squeaks and rattles</li>
+        </ul>
+      </div>
+      <div class="small-col">
+        <h3>Assemble &amp; Install</h3>
+        <ul>
+          <li>Furniture assembly</li>
+          <li>Smart doorbells and thermostats</li>
+          <li>Closet systems</li>
+          <li>Baby- and pet-proofing</li>
+          <li>Weatherstripping</li>
+        </ul>
+      </div>
+      <div class="small-col">
+        <h3>Ready-For</h3>
+        <ul>
+          <li>Pre-listing punch-ups</li>
+          <li>Pre-guest touch-ups</li>
+          <li>Seasonal checks</li>
+          <li>Filters and batteries</li>
+          <li>Walkthrough with a list</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="small-notes">
+      <p class="small-note"><b>Licensed trades stay licensed.</b> Electrical, plumbing, and structural work beyond simple swaps goes to vetted licensed pros. We'll tell you the difference before anyone touches a wall.</p>
+      <p class="small-note"><b>Serious collection?</b> Household art is us. Installation and care for collections is our sister brand, Wavelength Art, and we'll make the introduction.</p>
+    </div>
+  </div>
+</section>
+
+<section class="hoods" id="areas">
+  <div class="wrap">
+    <div class="sec-label">Where we work</div>
+    <h2>Proudly serving Atlanta's Intown neighborhoods.</h2>
+    <p class="body-copy">Craftsman bungalows, Victorians, and mid-century houses reward good work and punish shortcuts. We know which is which.</p>
+    <div class="hood-row">
+      <span class="hood">Buckhead</span>
+      <span class="hood">Midtown</span>
+      <span class="hood">Ansley Park</span>
+      <span class="hood">Virginia-Highland</span>
+      <span class="hood">Morningside</span>
+      <span class="hood">Inman Park</span>
+      <span class="hood">Candler Park</span>
+      <span class="hood">Grant Park</span>
+      <span class="hood">Ormewood Park</span>
+      <span class="hood">Kirkwood</span>
+      <span class="hood">Decatur</span>
+      <span class="hood">East Atlanta</span>
+      <span class="hood">West Midtown</span>
+      <span class="hood">Upper Westside</span>
+      <span class="hood">Cascade</span>
+      <span class="hood">Avondale</span>
+      <span class="hood" style="border-style:dashed; color:#8C877F; border-color:#8C877F">+ Nearby communities</span>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band" id="contact">
+  <div class="wrap">
+    <div class="sec-label" style="color:#8C877F">Start here</div>
+    <h2>Bring us the bid before you sign it.</h2>
+    <p class="body-copy">A one-hour consultation is usually enough to know whether your project needs an advocate, and enough to save you the fee several times over if it does.</p>
+    <a class="btn" href="#">Book a consultation</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="logo" href="#" aria-label="Wavelength Home">
+      <svg width="60" height="22" viewBox="0 0 200 64">
+        <path d="M0 50 H62 V30 L86 10 L110 30 V50 H200"
+          fill="none" stroke="#191919" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="logo-type"><b style="font-size:12px">WAVELENGTH</b><span style="font-size:9px">HOME</span></span>
+    </a>
+    <p>Your side of the build · A Wavelength Works company · Atlanta, GA</p>
+  </div>
+</footer>
+
+</body>
+</html>
